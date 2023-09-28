@@ -46,7 +46,7 @@ def main():
     
     v = get_int("Governor: ")
     i = math.ceil((div_con(dgsb) / 4) * v)
-    print(i)
+    print(f"Number of regions: {i}")
 
 
 if __name__ == "__main__":
