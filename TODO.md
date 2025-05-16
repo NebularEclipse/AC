@@ -2,9 +2,9 @@
 
 ## 1. Project Setup
 - [x] Initialize project repository on GitHub
-- [ ] Set up virtual environment and dependencies
-- [ ] Create requirements.txt with necessary libraries
-- [ ] Decide on UI framework (Flask, Streamlit, PyQt5/6, tkinter)
+- [x] Set up virtual environment and dependencies
+- [x] Create requirements.txt with necessary libraries
+- [x] Decide on UI framework (Flask)
 
 ## 2. Symmetric Algorithms Implementation (3 algorithms)
 - [ ] Select 3 symmetric algorithms (e.g., AES, DES, Blowfish)
