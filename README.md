@@ -4,10 +4,10 @@
 **Date:** May 24, 2025
 
 ## Group Members
-- Bata, Gian Carlo
-- Calingacion, Almira
+- Bata, Gian Carlo - (NebularEclipse, Carb0n-17)
+- Calingacion, Almira - (Almira2303)
 - Papa, Nikko
-- Tagum, Leo
+- Tagum, Leo - (Sauzzen)
 
 ---
 
