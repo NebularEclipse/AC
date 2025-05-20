@@ -8,6 +8,10 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
     />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/sidebar.css') }}"
+    />
     <script
       type="text/javascript"
       src="{{ url_for('static', filename='js/app.js') }}"
@@ -182,6 +186,18 @@
         <nav class="breadcrumbs">Pages <span class="twelve">/ {% block page1 %}{% endblock %}<span></nav>
         <span>{% block page2 %}{% endblock %}</span>
       </header>
+      <div class="content">
+        {% block content %}{% endblock %}
+      </div>
+      <footer class="main-footer">
+        <div>&copy; 2025 <span>aBitLock Bros</span>. Released under the MIT License.</div>
+        <nav>
+          <ul>
+            <li><a href="{{ url_for('gizmo.about') }}" class="{% block about_active %}{% endblock %}">About</a></li>
+            <li><a href="{{ url_for('gizmo.license') }}" class="{% block license_active %}{% endblock %}">License</a></li>
+          </ul>
+        </nav>
+      </footer>
     </main>
   </body>
 </html>
