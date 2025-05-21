@@ -1,10 +1,10 @@
-# CrytoConvert
+# CryptoSeal
 
 **Course:** CSAC 329 - Applied Cryptography - 2024-25-2  
 **Date:** May 24, 2025
 
-## Group Members
-- Bata, Gian Carlo - (NebularEclipse, Carb0n-17)
+## Group Members of aBitLocK Bros
+- Bata, Gian Carlo -  - (NebularEclipse, Carb0n-17)
 - Calingacion, Almira - (Almira2303)
 - Papa, Nikko
 - Tagum, Leo - (Sauzzen)
@@ -12,7 +12,7 @@
 ---
 
 ## Introduction
-CrytoConvert is a web-based cryptography toolkit designed to help users securely encrypt, decrypt, and hash both text and files using a variety of modern cryptographic algorithms. The project aims to demonstrate the practical application of cryptography in protecting data privacy and integrity, highlighting its importance in today's digital world.
+CryptoSeal is a web-based cryptography toolkit designed to help users securely encrypt, decrypt, and hash both text and files using a variety of modern cryptographic algorithms. The project aims to demonstrate the practical application of cryptography in protecting data privacy and integrity, highlighting its importance in today's digital world.
 
 ## Project Objectives
 1. Implement 3 symmetric and 2 asymmetric encryption algorithms for text and file security.
