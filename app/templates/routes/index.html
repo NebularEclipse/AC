@@ -6,5 +6,45 @@
 {% endblock %}
 {% endblock %}
 
+{% block link %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/layout-dashboard.css') }}">
+{% endblock %}
+
 {% block dashboard_active %}active{% endblock %}
 
+{% block content %}
+<div class="layout-dashboard">
+  <!-- Header -->
+  <div class="dashboard-header">
+    <h1>C R Y P T O S E A L</h1>
+    <p>Encrypt. Decrypt. Secure.</p>
+  </div>
+
+  <!-- Overview -->
+  <div class="dashboard-overview glass-card">
+    <h2>Welcome back!</h2>
+    <p>Start securing your data with just a few clicks. Choose an operation below to begin.</p>
+  </div>
+
+  <!-- Operation Panels -->
+  <div class="dashboard-features">
+    <div class="feature-card">
+      <h3>🔐 Symmetric</h3>
+      <p>Encrypt and decrypt using fast, secret-key methods.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🔑 Asymmetric</h3>
+      <p>Use public-private key encryption for secure sharing.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🧮 Hashing</h3>
+      <p>Generate secure hashes for integrity verification.</p>
+    </div>
+  </div>
+
+  <!-- Optional bottom panel -->
+  <div class="dashboard-footer glass-card">
+    <p class="fourteen secondary">Secure every bit. 🔒</p>
+  </div>
+</div>
+{% endblock %}

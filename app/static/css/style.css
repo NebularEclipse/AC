@@ -16,7 +16,7 @@
 }
 
 html {
-  font-family: Poppins, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Plus Jakarta Sans', "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.5rem;
 }
 
@@ -29,97 +29,4 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   overflow: auto;
-}
-
-.dashboard-header {
-    height: 53px;
-    margin: 0 16px;
-}
-
-.dashboard-header span {
-    color: var(--text-primary);
-    font-size: 14px;
-}
-
-.breadcrumbs {
-    color: var(--text-secondary);
-    font-size: 12px;
-}
-
-.breadcrumbs .twelve {
-    color: var(--text-primary);
-    font-size: 12px;
-}
-
-main {
-  margin: 24px;
-  min-height: calc(100vh - 48px);
-  display: flex;
-  flex-direction: column;
-}
-
-.main-footer {
-  color: var(--text-secondary);
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: auto;
-}
-
-.main-footer span {
-  color: var(--text-primary);
-}
-
-.main-footer a {
-  text-decoration: none;
-  color: var(--text-secondary);
-  font-size: 14px;
-}
-
-.main-footer a.active {
-  color: var(--text-primary);
-}
-
-.main-footer a:hover {
-  color: var(--text-primary)
-}
-
-.main-footer ul {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-}
-
-.content {
-  margin: 22px 0;
-  min-height: 500px;
-  height: auto;
-  width: 100%;
-  flex: 1;
-  overflow: auto;
-}
-
-.card {
-  height: 100%;
-  width: 100%;
-  border-radius: 20px;
-  background-color: var(--surface-clr);
-  backdrop-filter: blur(10px);
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.card * {
-  width: 100%;
-  color: var(--text-primary);
-}
-
-.card p {
-  color: var(--text-secondary);
 }

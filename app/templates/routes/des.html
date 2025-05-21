@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block page1 %}
+{% block page2 %}
+{% block title %}Data Encryption Standard{% endblock %}
+{% endblock %}
+{% endblock %}
+
+{% block link %}
+
+{% endblock %}
+
+{% block symmetric_active %}active{% endblock %}
+{% block symmetric_show %}show{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>{{ algo_name }}</h1>
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  {% for msg in messages %}
+  <div class="flash">{{ msg }}</div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  <form method="post">
+    <label for="text">Text</label>
+    <textarea name="text" id="text" required>{{ request.form.text or '' }}</textarea>
+
+    <label for="key">Key</label>
+    <input type="text" name="key" id="key" required value="{{ request.form.key or '' }}" />
+
+    <label for="mode">Mode</label>
+    <select name="mode" id="mode" required>
+      <option value="encrypt" {% if request.form.mode=='encrypt' %}selected{% endif %}>Encrypt</option>
+      <option value="decrypt" {% if request.form.mode=='decrypt' %}selected{% endif %}>Decrypt</option>
+    </select>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  {% if result %}
+  <div class="result">{{ result }}</div>
+  {% endif %}
+</div>
+{% endblock %}

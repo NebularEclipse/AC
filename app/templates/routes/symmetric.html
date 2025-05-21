@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block page1 %}
+{% block page2 %}
+{% block title %}Symmetric{% endblock %}
+{% endblock %}
+{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/symmetric.css') }}">
+{% endblock %}
+
+{% block symmetric_active %}active{% endblock %}
+{% block symmetric_show %}show{% endblock %}
+
+{% block content %}
+<div class="container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <div class="flash-messages">
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">
+      {{ message }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% endwith %}
+  <form id="symmertricForm" method="POST" enctype="multipart/form-data">
+    <div class="layer1">
+      <div>
+        <label for="algorithm" class="form-label">
+          Algorithm
+        </label>
+        <select name="algorithm" id="algorithm" class="form-select" required>
+          <option value="aes">AES (Advanced Encryption Standard)</option>
+          <option value="3des">Triple DES (Triple Data Encryption Standard)</option>
+          <option value="chacha20">ChaCha20</option>
+        </select>
+      </div>
+      <div>
+        <label for="action" class="form-label">
+          Action
+        </label>
+        <select name="action" id="action" class="form-select" required>
+          <option value="encrypt">Encrypt</option>
+          <option value="decrypt">Decrypt</option>
+        </select>
+      </div>
+      <div>
+        <label for="mode" class="form-label">
+          Action
+        </label>
+        <select name="mode" id="mode" class="form-select" required>
+          <option value="file">File</option>
+          <option value="text">Text</option>
+        </select>
+      </div>
+    </div>
+    <div class="layer2">
+      <label for="key" class="form-label">Encryption/Decryption Key</label>
+      <input type="password" name="key" id="key" class="form-control" required>
+    </div>
+    <div id="text-input" class="layer2">
+      <label for="text" class="form-label">Text</label>
+      <textarea name="text" id="text" class="form-control" rows="5"></textarea>
+    </div>
+    <div id="file-input" class="layer2">
+      <label for="file" class="form-label">File</label>
+      <input type="file" name="file" id="file" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Process</button>
+  </form>
+  <div class="result">
+    <label for="output" class="form-label">Output</label>
+    <textarea id="result" class="form-control" rows="5" readonly="">{{ result }}</textarea>
+  </div>
+</div>
+
+<script>
+  const modeSelect = document.getElementById('mode');
+  const textInput = document.getElementById('text-input');
+  const fileInput = document.getElementById('file-input');
+
+  function updateModeVisibility() {
+    const mode = modeSelect.value;
+    if (mode === 'text') {
+      textInput.style.display = 'block';
+      fileInput.style.display = 'none';
+    } else if (mode === 'file') {
+      textInput.style.display = 'none';
+      fileInput.style.display = 'block';
+    }
+  }
+
+  // Update form on mode change
+  modeSelect.addEventListener('change', updateModeVisibility);
+
+  // Run once on page load
+  updateModeVisibility();
+
+  const form = document.querySelector('form');
+  const resultArea = document.getElementById('result');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();  // prevent page reload
+
+    const formData = new FormData(form);
+
+    // Clear previous result or errors
+    resultArea.value = '';
+
+    try {
+      const response = await fetch('{{ url_for("gizmo.symmetric") }}', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+
+        if (data.error) {
+          resultArea.value = "Error: " + data.error;
+        } else {
+          resultArea.value = data.result;
+        }
+      } else {
+        resultArea.value = `Error: HTTP ${response.status}`;
+      }
+    } catch (err) {
+      resultArea.value = 'Error: ' + err.message;
+    }
+  });
+</script>
+{% endblock %}

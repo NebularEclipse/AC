@@ -1,0 +1,86 @@
+.layout-dashboard {
+  display: grid;
+  grid-template-rows: auto 1fr 1fr auto;
+  gap: 22px;
+  padding: 22px;
+  height: 100%;
+  box-sizing: border-box;
+  color: var(--text-primary);
+}
+
+.dashboard-header {
+  text-align: left;
+}
+
+.dashboard-header h1 {
+  font-size: 24px;
+}
+
+.dashboard-header p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.dashboard-overview {
+  padding: 22px;
+  text-align: center;
+}
+
+.dashboard-overview h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.dashboard-overview p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.dashboard-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+}
+
+.feature-card {
+  padding: 22px;
+  text-align: center;
+  border-radius: 20px;
+  background-color: var(--surface-clr);
+  backdrop-filter: blur(10px);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+}
+
+.feature-card h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.feature-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.dashboard-footer {
+  padding: 16px;
+  text-align: center;
+}
+
+.fourteen {
+  font-size: 14px;
+}
+
+.secondary {
+  color: var(--text-secondary);
+}
+
+.glass-card {
+  border-radius: 20px;
+  background-color: var(--surface-clr);
+  backdrop-filter: blur(10px);
+}

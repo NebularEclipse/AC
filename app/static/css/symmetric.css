@@ -1,0 +1,121 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.flash-messages .alert {
+    padding: 10px 16px;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.alert-success {
+    background-color: var(--accent-tertiary);
+    color: var(--text-primary);
+}
+
+.alert-danger {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: crimson;
+}
+
+.layer1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 22px;
+    margin-bottom: 22px;
+}
+
+.layer1>div {
+    border-radius: 20px;
+    background-color: var(--surface-clr);
+    backdrop-filter: blur(10px);
+    padding: 22px;
+}
+
+.layer2 {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 20px;
+    background-color: var(--surface-clr);
+    backdrop-filter: blud(10px);
+    padding: 22px;
+    margin-bottom: 22px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    display: block;
+    color: var(--text-primary);
+}
+
+.form-select,
+.form-control,
+textarea {
+    padding: 10px 14px;
+    font-size: 14px;
+    background-color: var(--surface-clr);
+    color: var(--text-primary);
+    border: 1px solid var(--border-clr, #ccc);
+    border-radius: 15px;
+    width: 100%;
+    transition: border 0.2s ease;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+}
+
+.form-control:focus,
+.form-select:focus,
+textarea:focus {
+    border-color: var(--accent-secondary);
+    outline: none;
+}
+
+button[type="submit"] {
+    margin-top: 10px;
+    margin-bottom: 22px;
+    background-color: var(--accent-tertiary);
+    color: var(--text-primary);
+    padding: 12px 24px;
+    border: none;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--accent-primary);
+    color: var(--text-primary);
+}
+
+.result {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 20px;
+    background-color: var(--surface-clr);
+    backdrop-filter: blud(10px);
+    padding: 22px;
+    margin-bottom: 22px;
+}
+
+#result {
+    background-color: var(--surface-clr);
+    border: 1px solid var(--border-clr, #ccc);
+    border-radius: 15px;
+    padding: 10px 14px;
+    font-family: monospace;
+    font-size: 13px;
+    color: var(--text-secondary);
+    width: 100%;
+}
