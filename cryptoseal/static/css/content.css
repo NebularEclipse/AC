@@ -1,0 +1,254 @@
+.content {
+    margin: 37px 14px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr;
+    gap: 22px;
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.content .center .dashboard {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 22px;
+    height: 100%;
+}
+
+.content .center .dashboard .upper {
+    gap: 22px;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+.content .center .dashboard .upper .name,
+.content .center .dashboard .upper .dev {
+    border-radius: 20px;
+    background-color: var(--surface-clr);
+    backdrop-filter: blur(10px);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+}
+
+.content .center .dashboard .upper .name h1,
+.content .center .dashboard .upper .dev h1 {
+    font-size: 14px;
+}
+
+.content .center .dashboard .upper .name p {
+    font-size: 12px;
+    margin-top: auto;
+}
+
+.content .center .dashboard .upper .dev {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 22px;
+}
+
+.content .center .dashboard .upper .dev .card-holder {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+/* TODO: complete the card-holder and dev-card style */
+
+.content .center .dashboard .lower {
+    gap: 22px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.content .center .dashboard .lower .algo {
+    border-radius: 20px;
+    background-color: var(--surface-clr);
+    backdrop-filter: blur(10px);
+    padding: 22px;
+}
+
+.content .center .symmetric {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.content .center .symmetric form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.content .center .symmetric form .aam {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 22px;
+}
+
+.aam .algo,
+.aam .action,
+.aam .mode,
+.key,
+.text-input,
+.file-input,
+.result {
+    border-radius: 20px;
+    background-color: var(--surface-clr);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding: 22px;
+}
+
+.text-input {
+    border-radius: 20px;
+    background-color: var(--surface-clr);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding: 22px;
+}
+
+.form-select,
+.form-control,
+textarea {
+    font-size: 14px;
+    width: 100%;
+    background-color: var(--surface-clr);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border-color: transparent;
+    padding: 5px;
+    color: var(--text-primary);
+}
+
+button {
+    all: unset;
+    cursor: pointer;
+
+    border-radius: 12px;
+    background-color: var(--surface-clr);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    text-decoration: none;
+    color: var(--text-primary);
+    border: 1px solid transparent;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: var(--accent-primary);
+    color: var(--accent-secondary);
+    font-weight: medium;
+}
+
+
+/* Hashing */
+.hash {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.hash form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.hash .operation-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-radius: 20px;
+    background-color: var(--surface-clr);
+    backdrop-filter: blur(10px);
+    padding: 16px;
+    line-height: 1;
+}
+
+.hash .form-label {
+    font-size: 14px;
+}
+
+/* Asymmetric */
+.asymm {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    overflow-y: hidden;
+}
+
+.asymm .asymmForm {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.asymm .form-group.operation-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-radius: 20px;
+    background-color: var(--surface-clr);
+    backdrop-filter: blur(10px);
+    padding: 16px;
+    line-height: 1;
+}
+
+.asymm #keygen-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.asymm #encrypt-fields,
+.asymm #decrypt-fields {
+    border-radius: 20px;
+    background-color: var(--surface-clr);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+}
+
+.asymm #decrypt-fields .operation-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+
+
+.asymm .operation-section.key-block button {
+    border: none;
+}
+
+.key-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    width: 100%;
+    border-radius: 20px;
+    background-color: var(--surface-clr);
+    backdrop-filter: blur(10px);
+    padding: 16px;
+}
+
+.key-panel .key-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+

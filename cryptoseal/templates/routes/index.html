@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block twelve %}
+{% block fourteen %}
+{% block title %}Dashboard{% endblock %}
+{% endblock %}
+{% endblock %}
+
+{% block db_active %}active{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+  <div class="upper">
+    <div class="name">
+      <h1>C R Y P T O S E A L</h1>
+      <p>Encrypt. Decrypt. Secure.</p>
+    </div>
+    <div class="dev">
+      <h1>Developers</h1>
+      <div class="card-holder">
+        <div class="dev-card">Gian</div>
+        <div class="dev-card">Mira</div>
+        <div class="dev-card">Leo</div>
+        <div class="dev-card">Nikko</div>
+      </div>
+    </div>
+  </div>
+  <div class="lower">
+    <div class="algo">Symmetric</div>
+    <div class="algo">Asymmetric</div>
+    <div class="algo">Hashing</div>
+  </div>
+</div>
+{% endblock %}

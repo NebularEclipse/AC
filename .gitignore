@@ -4,6 +4,7 @@ package-lock.json
 package.json
 app/test.py
 node_modules/
+.hintrc
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

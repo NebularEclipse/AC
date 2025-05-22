@@ -1,82 +1,59 @@
 {% extends 'base.html' %}
 
-{% block page1 %}
-{% block page2 %}
+{% block twelve %}
+{% block fourteen %}
 {% block title %}Symmetric{% endblock %}
 {% endblock %}
 {% endblock %}
 
-{% block link %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/symmetric.css') }}">
-{% endblock %}
-
-{% block symmetric_active %}active{% endblock %}
-{% block symmetric_show %}show{% endblock %}
+{% block s_active %}active{% endblock %}
 
 {% block content %}
-<div class="container">
-  {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-  <div class="flash-messages">
-    {% for category, message in messages %}
-    <div class="alert alert-{{ category }}">
-      {{ message }}
-    </div>
-    {% endfor %}
-  </div>
-  {% endif %}
-  {% endwith %}
-  <form id="symmertricForm" method="POST" enctype="multipart/form-data">
-    <div class="layer1">
-      <div>
-        <label for="algorithm" class="form-label">
-          Algorithm
-        </label>
-        <select name="algorithm" id="algorithm" class="form-select" required>
+<div class="symmetric">
+  <form id="symmetricForm" method="POST" enctype="multipart/form-data">
+    <div class="aam">
+      <div class="algo">
+        <label for="algo" class="form-label">Algorithm</label>
+        <select name="algo" id="algo" class="form-select" required>
           <option value="aes">AES (Advanced Encryption Standard)</option>
-          <option value="3des">Triple DES (Triple Data Encryption Standard)</option>
+          <option value="3des">3DES (Triple Data Encryption Standard)</option>
           <option value="chacha20">ChaCha20</option>
         </select>
       </div>
-      <div>
-        <label for="action" class="form-label">
-          Action
-        </label>
+      <div class="action">
+        <label for="action" class="form-label">Action</label>
         <select name="action" id="action" class="form-select" required>
           <option value="encrypt">Encrypt</option>
           <option value="decrypt">Decrypt</option>
         </select>
       </div>
-      <div>
-        <label for="mode" class="form-label">
-          Action
-        </label>
+      <div class="mode">
+        <label for="mode" class="form-label">Mode</label>
         <select name="mode" id="mode" class="form-select" required>
-          <option value="file">File</option>
           <option value="text">Text</option>
+          <option value="file">File</option>
         </select>
       </div>
     </div>
-    <div class="layer2">
+    <div class="key">
       <label for="key" class="form-label">Encryption/Decryption Key</label>
       <input type="password" name="key" id="key" class="form-control" required>
     </div>
-    <div id="text-input" class="layer2">
+    <div class="text-input" id="text-input">
       <label for="text" class="form-label">Text</label>
-      <textarea name="text" id="text" class="form-control" rows="5"></textarea>
+      <textarea name="text" id="text" class="form-control" rows="7"></textarea>
     </div>
-    <div id="file-input" class="layer2">
+    <div class="file-input" id="file-input">
       <label for="file" class="form-label">File</label>
       <input type="file" name="file" id="file" class="form-control">
     </div>
-    <button type="submit" class="btn btn-primary">Process</button>
+    <button type="submit">PROCESS</button>
   </form>
   <div class="result">
     <label for="output" class="form-label">Output</label>
-    <textarea id="result" class="form-control" rows="5" readonly="">{{ result }}</textarea>
+    <textarea id="result" class="form-control" rows="7" readonly="">{{ result }}</textarea>
   </div>
 </div>
-
 <script>
   const modeSelect = document.getElementById('mode');
   const textInput = document.getElementById('text-input');
@@ -85,11 +62,11 @@
   function updateModeVisibility() {
     const mode = modeSelect.value;
     if (mode === 'text') {
-      textInput.style.display = 'block';
+      textInput.style.display = 'flex';
       fileInput.style.display = 'none';
     } else if (mode === 'file') {
       textInput.style.display = 'none';
-      fileInput.style.display = 'block';
+      fileInput.style.display = 'flex';
     }
   }
 
@@ -103,20 +80,20 @@
   const resultArea = document.getElementById('result');
 
   form.addEventListener('submit', async (e) => {
-    e.preventDefault();  // prevent page reload
+    e.preventDefault();
 
     const formData = new FormData(form);
-
-    // Clear previous result or errors
     resultArea.value = '';
 
     try {
-      const response = await fetch('{{ url_for("gizmo.symmetric") }}', {
+      const response = await fetch('{{ url_for("routes.symmetric") }}', {
         method: 'POST',
         body: formData
       });
 
-      if (response.ok) {
+      const contentType = response.headers.get("Content-Type");
+
+      if (contentType && contentType.includes("application/json")) {
         const data = await response.json();
 
         if (data.error) {
@@ -125,8 +102,23 @@
           resultArea.value = data.result;
         }
       } else {
-        resultArea.value = `Error: HTTP ${response.status}`;
+        // This is a file response
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+
+        // Attempt to extract filename from Content-Disposition
+        const cd = response.headers.get("Content-Disposition");
+        const match = /filename="?(.+?)"?$/.exec(cd);
+        a.download = match ? match[1] : "output.bin";
+
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
       }
+
     } catch (err) {
       resultArea.value = 'Error: ' + err.message;
     }

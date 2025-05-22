@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+:root {
+  --text-primary: white;
+  --text-secondary: #a0aec0;
+
+  --accent-primary: #1a1f37;
+  --accent-secondary: #0075ff;
+  --accent-tertiary: #060b28;
+
+  --surface-clr: rgba(0, 0, 0, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  line-height: 1;
+}
+
+body {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: grid;
+  grid-template-columns: auto 1fr;
+
+  /* change later */
+  background: linear-gradient(to bottom right,
+    #060b28,
+    #003366,
+    #0f52ba);
+
+  overflow: auto;
+}

@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block twelve %}
+{% block fourteen %}
+{% block title %}Hashing{% endblock %}
+{% endblock %}
+{% endblock %}
+
+{% block h_active %}active{% endblock %}
+{% block content %}
+<div class="hash">
+  <form id="hashForm" method="POST" enctype="multipart/form-data">
+    <div class="operation-group">
+      <label for="algo" class="form-label">Algorithm</label>
+      <select name="algo" id="algo" class="form-select" required>
+        <option value="md5">MD5</option>
+        <option value="sha1">SHA1</option>
+        <option value="sha256">SHA256</option>
+        <option value="sha512">SHA512</option>
+      </select>
+    </div>
+    <div class="operation-group">
+      <label for="mode" class="form-label">Mode</label>
+      <select name="mode" id="mode" class="form-select" required>
+        <option value="text">Text</option>
+        <option value="file">File</option>
+      </select>
+    </div>
+    <div class="operation-group" id="text-input">
+      <label for="text" class="form-label">Text</label>
+      <textarea name="text" id="text" class="form-control" rows="5"></textarea>
+    </div>
+    <div class="operation-group" id="file-input">
+      <label for="file" class="form-label">File</label>
+      <input type="file" name="file" id="file" class="form-control">
+    </div>
+    <button type="submit">HASH</button>
+  </form>
+
+  <div class="result">
+    <label class="form-label">Result</label>
+    <textarea id="result" class="form-control" rows="4" readonly></textarea>
+  </div>
+</div>
+
+<script>
+  const modeSelect = document.getElementById('mode');
+  const textInput = document.getElementById('text-input');
+  const fileInput = document.getElementById('file-input');
+  const form = document.getElementById('hashForm');
+  const resultArea = document.getElementById('result');
+
+  function toggleMode() {
+    const mode = modeSelect.value;
+    textInput.style.display = (mode === 'text') ? 'flex' : 'none';
+    fileInput.style.display = (mode === 'file') ? 'flex' : 'none';
+  }
+
+  modeSelect.addEventListener('change', toggleMode);
+  toggleMode(); // Initial load
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    resultArea.value = '';
+
+    try {
+      const res = await fetch('{{ url_for("routes.hash_view") }}', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await res.json();
+      resultArea.value = data.error ? 'Error: ' + data.error : data.result;
+    } catch (err) {
+      resultArea.value = 'Error: ' + err.message;
+    }
+  });
+</script>
+{% endblock %}

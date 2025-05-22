@@ -1,0 +1,21 @@
+.content header {
+    margin-left: 16px;
+}
+
+.content header p.twelve {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: normal;
+    margin-bottom: 5px;
+}
+
+.content header p.twelve span {
+    color: var(--text-primary);
+    font-weight: medium;
+}
+
+.content header p.fourteen {
+    font-size: 14px;
+    color: var(--text-primary);
+    font-weight: medium;
+}

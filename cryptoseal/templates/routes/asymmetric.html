@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+
+{% block twelve %}
+{% block fourteen %}
+{% block title %}Asymmetric{% endblock %}
+{% endblock %}
+{% endblock %}
+
+{% block as_active %}active{% endblock %}
+
+{% block content %}
+<div class="asymm">
+    <form class="asymmForm" id="asymmetricForm">
+        <div class="form-group operation-group">
+            <label for="operation" class="form-label">Operation</label>
+            <select name="operation" id="operation" class="form-select" required>
+                <option value="keygen">Key Generation</option>
+                <option value="encrypt">Encrypt</option>
+                <option value="decrypt">Decrypt</option>
+            </select>
+        </div>
+
+        <div class="form-group operation-group">
+            <label for="algo" class="form-label">Algorithm</label>
+            <select name="mode" id="algo" class="form-select" required>
+                <option value="rsa">RSA</option>
+                <option value="ecc">ECC</option>
+            </select>
+        </div>
+
+        <!-- Keygen section -->
+        <div id="keygen-fields" class="operation-section key-block">
+            <button type="submit" class="btn btn-primary">Generate Keys</button>
+            <div class="key-panel">
+                <div class="key-container">
+                    <label for="gen_public_key" class="form-label mt-3">Public Key</label>
+                    <textarea id="gen_public_key" class="form-control" rows="10" readonly></textarea>
+                </div>
+                <div class="key-container">
+                    <label for="gen_private_key" class="form-label mt-3">Private Key</label>
+                    <textarea id="gen_private_key" class="form-control" rows="10" readonly></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Encrypt section -->
+        <div id="encrypt-fields" class="operation-section key-block">
+            <label for="message" class="form-label">Message</label>
+            <textarea id="message" name="message" class="form-control" rows="4"></textarea>
+
+            <label for="public_key" class="form-label">Public Key (PEM)</label>
+            <textarea id="public_key" name="public_key" class="form-control" rows="4"></textarea>
+
+            <button type="submit" class="btn btn-primary mt-2">Encrypt</button>
+        </div>
+        <!-- Decrypt section -->
+        <div id="decrypt-fields" class="operation-section key-block">
+            <label for="private_key" class="form-label">Private Key (PEM)</label>
+            <textarea id="private_key" name="private_key" class="form-control" rows="4"></textarea>
+
+            <div id="rsa-fields" class="operation-group">
+                <label for="ciphertext" class="form-label">Ciphertext (Hex)</label>
+                <textarea id="ciphertext" name="ciphertext" class="form-control" rows="3"></textarea>
+            </div>
+
+            <div id="ecc-fields" class="operation-group">
+                <label for="ecc_data" class="form-label">ECC Encrypted JSON</label>
+                <textarea id="ecc_data" name="ecc_data" class="form-control" rows="4"
+                    placeholder='{"ephemeral_pub": "...", "nonce": "...", "ciphertext": "...", "tag": "..."}'></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-2">Decrypt</button>
+        </div>
+    </form>
+
+    <div class="result key-block mt-3">
+        <label for="result" class="form-label">Result</label>
+        <textarea id="result" class="form-control" rows="6" readonly></textarea>
+    </div>
+</div>
+
+<script>
+    const operationSelect = document.getElementById('operation');
+    const algoSelect = document.getElementById('algo');
+
+    const keygenFields = document.getElementById('keygen-fields');
+    const encryptFields = document.getElementById('encrypt-fields');
+    const decryptFields = document.getElementById('decrypt-fields');
+
+    const rsaFields = document.getElementById('rsa-fields');
+    const eccFields = document.getElementById('ecc-fields');
+    const resultArea = document.getElementById('result');
+
+    function updateVisibility() {
+        const op = operationSelect.value;
+        keygenFields.style.display = op === 'keygen' ? 'flex' : 'none';
+        encryptFields.style.display = op === 'encrypt' ? 'flex' : 'none';
+        decryptFields.style.display = op === 'decrypt' ? 'flex' : 'none';
+
+        const algo = algoSelect.value;
+        rsaFields.style.display = (op === 'decrypt' && algo === 'rsa') ? 'flex' : 'none';
+        eccFields.style.display = (op === 'decrypt' && algo === 'ecc') ? 'flex' : 'none';
+    }
+
+    operationSelect.addEventListener('change', updateVisibility);
+    algoSelect.addEventListener('change', updateVisibility);
+    updateVisibility();  // Run on load
+
+    document.getElementById('asymmetricForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        resultArea.value = "";
+
+        const op = operationSelect.value;
+        const mode = algoSelect.value;
+
+        try {
+            let res, data;
+
+            if (op === 'keygen') {
+                res = await fetch('{{ url_for("routes.keygen") }}', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mode })
+                });
+
+                const data = await res.json();
+                if (data.error) {
+                    resultArea.value = "Error: " + data.error;
+                } else {
+                    document.getElementById('gen_public_key').value = data.public_key || "";
+                    document.getElementById('gen_private_key').value = data.private_key || "";
+                    resultArea.value = "Key pair generated successfully.";
+                }
+                return;
+            }
+
+
+            if (op === 'encrypt') {
+                const message = document.getElementById('message').value;
+                const public_key = document.getElementById('public_key').value;
+
+                res = await fetch('{{ url_for("routes.encrypt_route") }}', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mode, message, public_key })
+                });
+            }
+
+            if (op === 'decrypt') {
+                const private_key = document.getElementById('private_key').value;
+
+                let payload = { mode, private_key };
+
+                if (mode === 'rsa') {
+                    payload.ciphertext = document.getElementById('ciphertext').value;
+                } else if (mode === 'ecc') {
+                    try {
+                        payload.encrypted_data = JSON.parse(document.getElementById('ecc_data').value);
+                    } catch (e) {
+                        resultArea.value = "Invalid ECC JSON.";
+                        return;
+                    }
+                }
+
+                res = await fetch('{{ url_for("routes.decrypt_route") }}', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            }
+
+            data = await res.json();
+            const firstKey = Object.keys(data)[0];
+            const firstValue = data[firstKey];
+            const displayValue = (typeof firstValue === 'object') ? JSON.stringify(firstValue, null, 2) : firstValue;
+
+            resultArea.value = data.error ? "Error: " + data.error : displayValue;
+        } catch (err) {
+            resultArea.value = "Error: " + err.message;
+        }
+    });
+</script>
+{% endblock %}
