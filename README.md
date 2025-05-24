@@ -1,9 +1,26 @@
 # 🔐 CryptoSeal
+[pythonanywhere.com](https://gr33d.pythonanywhere.com/hash)
 
 **Course:** CSAC 329 - Applied Cryptography
 **Date:** May 24, 2025
+---
 
-## 👥 Group Members (aBitLocK Bros)
+## Table of Contents
+- [Team Members](#team-members)
+- [Introduction](#introduction)
+- [Project Objectives](#project-objectives)
+- [Discussions](#discussion)
+- [Sample Outputs](#sample-outputs)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Usage](#usgae)
+- [User Roles](#user-roles)
+- [Python Libraries](#python-libraries)
+- [License](#license)
+
+---
+
+## 👥 Team Members (aBitLocK Bros)
 - Bata, Gian Carlo -  - (NebularEclipse, Carb0n-17)
 - Calingacion, Almira - (Almira2303)
 - Papa, Nikko
@@ -18,14 +35,12 @@ CryptoSeal is a web-based cryptographic toolkit for encrypting, decrypting, and 
 ## 🎯 Project Objectives
 1. Implement 3 symmetric and 2 asymmetric encryption algorithms
 2. Provide 4 hashing functions for text and file verification.
-3. Integrate user roles, address management via PSGC API, and rate limiting for enhanced usability and security.
 ---
 
-## Discussions
+## 💬 Discussions
 ### 🧱 Application Architecture & UI
 - **Backend:**
 - Language/Framework: Python (Flask)
-- Database: SQLite
 - Logic: Modular structure under logic/ directory
 - **Frontend:**
 - HTML/CSS/JS
@@ -37,15 +52,15 @@ CryptoSeal is a web-based cryptographic toolkit for encrypting, decrypting, and 
 ### 🔄 Symmetric Encryption
 | Algorithm    | Library                         | Notes                          
 | ------------ | ------------------------------- | ------------------------------|
-| **AES**      | `cryptography` / `pycryptodome` | Standard secure encryption (text & files) |
-| **DES**      | `pycryptodome`                  | Legacy algorithm, included for comparison |
-| **ChaCha20** | `pycryptodome`                  | Fast and modern stream cipher |
+| **AES**      | `cryptography`                  | Standard secure encryption (text & files) |
+| **DES**      | `cryptography`                  | Legacy algorithm, included for comparison |
+| **ChaCha20** | `cryptography`                  | Fast and modern stream cipher |
 
 
 #### 🔐 Asymmetric Encryption
 | Algorithm | Library                         | Notes                                      |
 | --------- | ------------------------------- | --------------------------------|
-| **RSA**   | `cryptography` / `pycryptodome` | Secure key exchange, text encryption       |
+| **RSA**   | `cryptography`                  | Secure key exchange, text encryption       |
 | **ECC**   | `cryptography`                  | Efficient and modern, key-based encryption |
 
 
@@ -55,13 +70,19 @@ CryptoSeal is a web-based cryptographic toolkit for encrypting, decrypting, and 
 | **SHA-256** | `hashlib` | Secure and standard                 |
 | **MD5**     | `hashlib` | Fast but insecure (educational use) |
 | **SHA-1**   | `hashlib` | Legacy, not secure                  |
-| **BLAKE2**  | `hashlib` | Modern, high performance            |
+| **SHA-512** | `hashlib` | Modern, high performance            |
 
 
 ---
 
 ## 🖼️ Sample Outputs
-- Screenshots and code output examples will be provided for each algorithm's encryption, decryption, and hashing (text and file). See `/Mockup/` and UI screenshots in the repository.
+- Screenshots and code output examples will be provided for each algorithm's encryption, decryption, and hashing (text and file). See `/Screenshot/` and UI screenshots in the repository.
+
+![Screenshot](Screenshot/Asymmetric_E.png)
+![Screenshot](Screenshot/Asymmetric_D.png)
+![Screenshot](Screenshot/Symmetric.png)
+![Screenshot](Screenshot/MD5.png)
+
 
 ---
 
@@ -69,8 +90,6 @@ CryptoSeal is a web-based cryptographic toolkit for encrypting, decrypting, and 
 - Encrypt/decrypt text and files (symmetric & asymmetric)
 - Hash text/files using standard algorithms
 - Role-based authentication (Admin, User)
-- PSGC API integration for address validation
-- Rate limiting to prevent abuse
 
 ## 🚀 Getting Started
 ### ✅ Prerequisites
@@ -98,7 +117,7 @@ CryptoSeal is a web-based cryptographic toolkit for encrypting, decrypting, and 
    ```powershell
    flask --app app run
    ```
-
+   
 ## Usage
 - Open your browser: `http://127.0.0.1:5000/`
 - Use the sidebar to select cryptographic tools
@@ -110,26 +129,18 @@ CryptoSeal is a web-based cryptographic toolkit for encrypting, decrypting, and 
 | **Admin** | Full access: cryptographic tools + user/account management |
 | **User**  | Limited access: encryption, decryption, address tools      |
 
-
-## 📍 Address Management (PSGC API)
-- Integrates Philippine Standard Geographic Code (PSGC) API for precise address handling and validation.
-
 🧰 Technologies Used
 - Languages/Frameworks: Python, Flask, HTML, CSS, JavaScript
-- Database: SQLite
 
 ## 📚 Python Libraries
 
-- **pyca/cryptography:** Core cryptographic primitives and recipes for encryption, decryption, and key management.
-- **PyCryptodome:** Self-contained Python package of low-level cryptographic primitives (AES, DES, ChaCha20, RSA, etc.).
-- **Cryptocode:** Simple library for symmetric and asymmetric encryption, used for educational examples.
+- **cryptography:** Core cryptographic primitives and recipes for encryption, decryption, and key management.
+-  Self-contained Python package of low-level cryptographic primitives (AES, 3DES, ChaCha20, RSA, etc.).
+-  Simple library for symmetric and asymmetric encryption, used for educational examples.
 - **RSA:** Python library for RSA key generation, encryption, and decryption.
 - **hashlib:** Standard Python library for hashing algorithms (SHA-256, SHA-1, MD5, BLAKE2).
 - **pyaes:** Pure-Python implementation of AES, used for demonstration and testing.
 
-
-## Rate Limiting
-- Prevents abuse by limiting requests per user/IP (Flask-Limiter or similar)
 
 ## License
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
